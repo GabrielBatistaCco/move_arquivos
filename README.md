@@ -17,19 +17,14 @@ git clone https://github.com/GabrielBatistaCco/move_arquivos
 cd move_arquivos/
 </pre>
 
-Dê permissão para execução a opção desejada:
+Dê permissão para execução:
 
-<pre>chmod +x move_direto.sh</pre>
-ou
-<pre>chmod +x move_seleciona.sh</pre>
+<pre>chmod +x move_arquivos.sh</pre>
 
-OBS: Se optar pelo arquivo "move_direto.sh", verifique as variaveis "DIR_SRC" e "DIR_DST" (linhas: 11 e 12), sendo elas:
+Após isso, basta executar o script informando os diretórios de origem e destino respectivamente:
 
-- DIR_SRC: Diretório de origem dos arquivos/diretórios.
-- DIR_DST: Diretório de destino dos arquivos/diretórios.
+<pre>
+./move_arquivos.sh /var/origem /var/destino
+</pre>
 
-Após isso, basta executar o script e esperar sua conclusão!
-
-<pre>./move_direto.sh</pre>
-ou
-<pre>./move_seleciona.sh</pre>
+E aguardar sua execução!
