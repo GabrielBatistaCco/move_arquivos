@@ -1,6 +1,6 @@
 Script By: Gabriel Souza
 
-###===== Observações =====###
+<h2>Observações</h2>
 
 Esse script foi criado para automativar a movimentação de uma lista de arquivos muito grande.
 
@@ -10,7 +10,7 @@ Não execute sem antes entende-lo!
 
 Não me responsabilizo pela possível perda de arquivos!
 
-###===== Instruções de uso =====###
+<h2>Instruções de uso</h2>
 
 Baixe o script com:
 
