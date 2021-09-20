@@ -24,7 +24,7 @@ Dê permissão para execução:
 Após isso, basta executar o script informando os diretórios de origem e destino respectivamente:
 
 <pre>
-./move_arquivos.sh /var/origem /var/destino
+./move_arquivos.sh /diretorio/origem/ /diretorio/destino/
 </pre>
 
 E aguardar sua execução!
