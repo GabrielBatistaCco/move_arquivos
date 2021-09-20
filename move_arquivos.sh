@@ -60,7 +60,6 @@ function valida_movimentacao {
   let QTD=$COUNT_S+$COUNT_F;
   PROG=$(((QTD * 100) / $QTD_TOTAL));
   PROG_BAR=$((PROG * MAX_BAR_SIZE / 100));
-  sleep 1
   echo -ne "\\rProgresso: [${BAR_SIZE:0:PROG_BAR}] $PROG % - $QTD/$QTD_TOTAL";
 }
 
@@ -68,7 +67,7 @@ if [[ ! -d $DIR_SRC && ! -d $DIR_DST ]] || [[ -z $DIR_SRC && -z $DIR_DST ]]
 then
   echo ""; echo "Diretorios informados não encontrados, favor inserir diretorios validos!"; echo "";
   exit 0;
-elif [ $DIR_DST == $DIR_DST ]
+elif [ $DIR_SRC == $DIR_DST ]
 then
   echo ""; echo "Diretorio de origem nao pode ser o mesmo de destino, favor inserir diretorios validos!"; echo "";
   exit 0;
