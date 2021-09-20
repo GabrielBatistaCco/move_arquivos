@@ -82,7 +82,7 @@ function valida_movimentacao {
     if [ `ls -d1 $DIR_DST/$1 2>/dev/null | wc -l` -eq 1 ]
     then
       echo -e "$(date "+%d/%m/%Y %H:%M:%S") - $1 ${GREEN}(sucesso)${NC}" >> $LOG;
-      #rm $DIR_SRC/$1 -r 2>/dev/null;
+      rm $DIR_SRC/$1 -r 2>/dev/null;
       let COUNT_S++;
     else
       echo -e "$(date "+%d/%m/%Y %H:%M:%S") - $1 ${RED}(nao encontrado)${NC}" >> $LOG;
