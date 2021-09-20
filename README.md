@@ -1,6 +1,6 @@
 <h2>Observações</h2>
 
-Esse script foi criado para automativar a movimentação de uma lista de arquivos muito grande.
+Esse script foi criado para automatizar a movimentação de uma lista de arquivos muito grande.
 
 Leia e verifique se a aplicação dele é o que realmente precisa!
 
