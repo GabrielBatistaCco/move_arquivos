@@ -1,5 +1,3 @@
-Script By: Gabriel Souza
-
 <h2>Observações</h2>
 
 Esse script foi criado para automativar a movimentação de uma lista de arquivos muito grande.
