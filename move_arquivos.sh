@@ -68,7 +68,7 @@ if [[ ! -d $DIR_SRC && ! -d $DIR_DST ]] || [[ -z $DIR_SRC && -z $DIR_DST ]]
 then
   echo ""; echo "Diretorios informados não encontrados, favor inserir diretorios validos!"; echo "";
   exit 0;
-elif [ $DIR_DST -eq $DIR_DST ]
+elif [ $DIR_DST == $DIR_DST ]
 then
   echo ""; echo "Diretorio de origem nao pode ser o mesmo de destino, favor inserir diretorios validos!"; echo "";
   exit 0;
@@ -145,7 +145,6 @@ else
     echo "TOTAL = $QTD_TOTAL";
     echo "SUCESSO = $COUNT_S";
     echo "FALHAS = $COUNT_F";
-
     print_separador;
 
     if [ $COUNT_F -gt 0 ]
