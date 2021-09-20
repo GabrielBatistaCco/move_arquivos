@@ -8,7 +8,7 @@ DIR_SRC=${DIR_SRC%/};
 DIR_DST="$2";
 DIR_DST=${DIR_DST%/};
 
-ROOT="/root/move_arquivos";
+ROOT=`pwd`;
 LISTA_SRC="$ROOT/lista_arquivos.txt";
 LISTA_DIR_SRC="$ROOT/lista_diretorios.txt";
 LISTA_F="$ROOT/lista_falhas.txt";
@@ -83,11 +83,6 @@ then
 else
   tput civis -- invisible
   echo "###======== Inicio execucao $(date "+%d/%m/%Y %H:%M:%S") ========###" >> $LOG;
-
-  if [ ! -d "$ROOT" ]
-  then
-    mkdir $ROOT;
-  fi
 
   print_separador;
   echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Listando arquivos e diretorios a serem movidos..." >> $LOG;
