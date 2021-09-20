@@ -26,15 +26,15 @@ GREEN='\033[0;32m';
 NC='\033[0m' # Reset cor
 
 #Barra de progresso
-BAR_SIZE="#####################################################"
-MAX_BAR_SIZE=${#BAR_SIZE}
+BAR_SIZE="#####################################################";
+MAX_BAR_SIZE=${#BAR_SIZE};
 
-trap killgroup SIGINT
+trap killgroup SIGINT;
 
 killgroup(){
-  echo "Script abortado..."
-  tput cnorm -- normal
-  exit 0
+  echo "Script abortado...";
+  tput cnorm -- normal;
+  exit 0;
 }
 
 function entrada_diretorios {
@@ -189,3 +189,4 @@ echo ""; echo 'Para mais detalhes da execucao do script, consulte: '$LOG'!';
 
 echo "" >> $LOG; echo "###======== Fim da execucao $(date "+%d/%m/%Y %H:%M:%S") ========###" >> $LOG; echo "" >> $LOG;
 print_separador;
+exit 0;
