@@ -5,16 +5,16 @@
 
 # Instruções de uso:
 # Substitua as variaveis "DIR_SRC" e "DIR_DST" para execucoa automatica (linhas: 11 e 12)
-# ou comente-as e descomente a chamada da funcao "entrada_diretorios" (linha: 104)
+# ou comente-as e descomente a chamada da funcao "entrada_diretorios" (linha: 108)
 # para selecao dos diretorios durante a execucao.
 
-DIR_SRC="/var/www/arquivos";
+DIR_SRC="/var/www/arquivos/";
 DIR_DST="/mnt/teste";
 
 ROOT="/root/move_arquivos";
-LISTA_SRC='/root/move_arquivos/lista_arquivos.txt';
-LISTA_DIR_SRC='/root/move_arquivos/lista_diretorios.txt';
-LISTA_F='/root/move_arquivos/lista_falhas.txt';
+LISTA_SRC="$ROOT/lista_arquivos.txt";
+LISTA_DIR_SRC="$ROOT/lista_diretorios.txt";
+LISTA_F="$ROOT/lista_falhas.txt";
 
 LOG='/var/log/move_arquivos.log';
 
@@ -26,8 +26,8 @@ GREEN='\033[0;32m';
 NC='\033[0m' # Reset cor
 
 #Barra de progresso
-declare -r BAR_SIZE="######################################################################"
-declare -r MAX_BAR_SIZE=${#BAR_SIZE}
+BAR_SIZE="#####################################################"
+MAX_BAR_SIZE=${#BAR_SIZE}
 
 trap killgroup SIGINT
 
@@ -73,7 +73,10 @@ function entrada_diretorios {
       FALHA_DIR=0;
     fi
   done
-  echo ""; echo "##========================================================##";
+}
+
+function print_separador {
+  echo ""; echo "##==========================================================================##";
 }
 
 function valida_movimentacao {
@@ -98,7 +101,8 @@ function valida_movimentacao {
   let QTD=$COUNT_S+$COUNT_F;
   PROG=$(((QTD * 100) / $QTD_TOTAL));
   PROG_BAR=$((PROG * MAX_BAR_SIZE / 100));
-  echo -ne "\\r[${BAR_SIZE:0:PROG_BAR}] $PROG % - $QTD/$QTD_TOTAL";
+  sleep 1
+  echo -ne "\\rProgresso: [${BAR_SIZE:0:PROG_BAR}] $PROG % - $QTD/$QTD_TOTAL";
 }
 
 #entrada_diretorios;
@@ -115,11 +119,12 @@ then
   mkdir $ROOT;
 fi
 
+print_separador;
 echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Listando arquivos e diretorios a serem movidos..." >> $LOG;
 echo ""; echo "Listando arquivos e diretorios a serem movidos...";
 
-ls -1 $DIR_SRC > $LISTA_SRC;
-ls -d1 $DIR_SRC/*/ | awk -F "$DIR_SRC/" {'print $2'} > $LISTA_DIR_SRC;
+ls -1 $DIR_SRC > $LISTA_SRC 2>/dev/null;
+ls -d1 $DIR_SRC/*/ 2>/dev/null | awk -F "$DIR_SRC/" {'print $2'} > $LISTA_DIR_SRC;
 
 echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Verificando arquivos e diretorios..." >> $LOG;
 echo ""; echo "Verificando arquivos e diretorios...";
@@ -134,6 +139,8 @@ done < "$LISTA_DIR_SRC"
 
 QTD_ARQUIVOS=`cat $LISTA_SRC | wc -l`;
 QTD_DIR=`cat $LISTA_DIR_SRC | wc -l`;
+
+echo ""; echo "Listas para movimentacao criadas em $ROOT";
 
 echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - $QTD_TOTAL verificados, sendo $QTD_ARQUIVOS arquivos e $QTD_DIR diretorios" >> $LOG;
 
@@ -160,25 +167,25 @@ echo "" >> $LOG; echo "Resumo:" >> $LOG; echo "" >> $LOG;
 echo "TOTAL = $QTD_TOTAL" >> $LOG;
 echo "SUCESSO = $COUNT_S" >> $LOG;
 echo "FALHAS = $COUNT_F" >> $LOG;
+echo ""; print_separador;
 
-echo ""; echo ""; echo "FIM DA EXECUCAO DO SCRIPT!";
-
-echo ""; echo "Resumo:"; echo "";
+echo ""; echo "Resumo da execucao:"; echo "";
 echo "TOTAL = $QTD_TOTAL";
 echo "SUCESSO = $COUNT_S";
 echo "FALHAS = $COUNT_F";
-echo ""; echo 'Para mais detalhes da execucao do script, consulte a lista '$LOG'!';
-echo "As listas de arquivos e diretorios movidos estao em $ROOT/"; echo "";
+
+print_separador;
 
 if [ $COUNT_F -gt 0 ]
 then
-  echo -e "${RED}!!! SCRIPT EXECUTADO COM FALHA !!!${NC}";
+  echo ""; echo -e "${RED}!!! SCRIPT EXECUTADO COM FALHA !!!${NC}";
   echo "Verifique a lista de falhas em: $LISTA_F.";
 else
   rm $LISTA_F;
-  echo -e "${GREEN}!!! SCRIPT EXECUTADO COM SUCESSO !!!${NC}";
+  echo ""; echo -e "${GREEN}!!! SCRIPT EXECUTADO COM SUCESSO !!!${NC}";
   echo "Todos os arquivos e diretorios foram movidos e validados!";
 fi
+echo ""; echo 'Para mais detalhes da execucao do script, consulte: '$LOG'!';
 
 echo "" >> $LOG; echo "###======== Fim da execucao $(date "+%d/%m/%Y %H:%M:%S") ========###" >> $LOG; echo "" >> $LOG;
-echo "";
+print_separador;
