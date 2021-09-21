@@ -1,12 +1,10 @@
 <h2>Observações</h2>
 
-Script em shell criado para automatizar a movimentação de uma lista de arquivos muito grande.
+Script em shell criado para automatizar a movimentação de uma lista de arquivos muito extensa.
 
-Leia e verifique se a aplicação dele é o que realmente precisa!
+Basicamente o script irá copiar arquivos/diretórios individualmente de um diretório origem, para um diretório destino que desejar, fazendo uma validação simples da existencia do arquivo no diretório destino, seguido da remoção do arquivo no diretório origem.
 
-Não execute sem antes entende-lo!
-
-Não me responsabilizo pela possível perda de arquivos!
+Aproveite e leia o script antes de executa-lo, verifique se atende a sua demanda, pois não me responsabilizo pela possível perda de arquivos!
 
 <h2>Instruções de uso</h2>
 
