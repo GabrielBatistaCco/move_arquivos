@@ -3,10 +3,8 @@
 # Script By: Gabriel Souza
 # OBS: Script dedicado a movimentacao automatizada de uma grande lista de arquivos.
 
-DIR_SRC="$1";
-DIR_SRC=${DIR_SRC%/};
-DIR_DST="$2";
-DIR_DST=${DIR_DST%/};
+DIR_SRC=${1%/};
+DIR_DST=${2%/};
 
 ROOT=`pwd`;
 LISTA_SRC="$ROOT/lista_arquivos.txt";
@@ -90,6 +88,8 @@ else
   ls -1 $DIR_SRC > $LISTA_SRC;
   ls -d1 $DIR_SRC/*/ 2>/dev/null | awk -F "$DIR_SRC/" {'print $2'} > $LISTA_DIR_SRC;
 
+  echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Listas criadas em $ROOT/..." >> $LOG;
+
   echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Verificando arquivos e diretorios..." >> $LOG;
   echo ""; echo "Verificando arquivos e diretorios...";
 
@@ -106,7 +106,7 @@ else
 
   if [ $QTD_TOTAL -gt 0 ]
   then
-    echo ""; echo "Listas para movimentacao criadas em $ROOT";
+    echo ""; echo "Listas para movimentacao criadas em $ROOT/";
 
     echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - $QTD_TOTAL verificados, sendo $QTD_ARQUIVOS arquivos e $QTD_DIR diretorios" >> $LOG;
 
