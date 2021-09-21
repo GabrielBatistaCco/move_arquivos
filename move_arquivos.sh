@@ -24,14 +24,6 @@ NC='\033[0m' # Reset cor
 BAR_SIZE="#####################################################"
 MAX_BAR_SIZE=${#BAR_SIZE}
 
-trap killgroup SIGINT
-
-killgroup(){
-  echo "Script abortado..."
-  tput cnorm -- normal
-  exit 0
-}
-
 function print_separador {
   echo ""; echo "##==========================================================================##";
 }
@@ -78,7 +70,6 @@ then
   echo ""; echo "Diretorio destino não encontrado, favor inserir um diretorio valido!"; echo "";
   exit 0;
 else
-  tput civis -- invisible
   echo "###======== Inicio execucao $(date "+%d/%m/%Y %H:%M:%S") ========###" >> $LOG;
 
   print_separador;
@@ -127,8 +118,6 @@ else
       valida_movimentacao $linha;
     done < "$LISTA_DIR_SRC"
 
-    tput cnorm -- normal
-
     echo "" >> $LOG; echo "Resumo:" >> $LOG; echo "" >> $LOG;
     echo "TOTAL = $QTD_TOTAL" >> $LOG;
     echo "SUCESSO = $COUNT_S" >> $LOG;
@@ -152,7 +141,6 @@ else
     fi
     echo ""; echo 'Para mais detalhes da execucao do script, consulte: '$LOG'!';
   else
-    tput cnorm -- normal
     echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Nenhum arquivo/diretorio encontrato em $DIR_SRC para mover!" >> $LOG;
     echo ""; echo "Nenhum arquivo/diretorio encontrato em $DIR_SRC para mover!";
     echo ""; echo "Finalizando execução!";
