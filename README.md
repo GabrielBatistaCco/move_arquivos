@@ -25,9 +25,7 @@ Após isso, basta executar o script informando os diretórios de origem e destin
 ./move_arquivos.sh /diretorio/origem/ /diretorio/destino/
 </pre>
 
-E aguardar sua execução!
-
-Se quiser acompanhar a execução com mais detalhes use:
+Se quiser acompanhar a execução detalhadamente, abra outro terminal e use:
 
 <pre>
 tail -f /var/log/move_arquivos.log
