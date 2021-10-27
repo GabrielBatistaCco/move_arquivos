@@ -26,3 +26,9 @@ Após isso, basta executar o script informando os diretórios de origem e destin
 </pre>
 
 E aguardar sua execução!
+
+Se quiser acompanhar a execução com mais detalhes use:
+
+<pre>
+tail -f /var/log/move_arquivos.log
+</pre>
