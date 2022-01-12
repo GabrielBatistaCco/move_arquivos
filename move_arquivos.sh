@@ -80,6 +80,7 @@ else
     ls -1 $DIR_SRC > $LISTA_SRC;
     ls -d1 $DIR_SRC/*/ 2>/dev/null | awk -F "$DIR_SRC/" {'print $2'} > $LISTA_DIR_SRC;
     echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Listas criadas em $ROOT/..." >> $LOG;
+    echo ""; echo "Listas para movimentacao criadas em $ROOT/";  
   else
     echo ""; echo "Ja existe pelo menos uma lista em $ROOT/! A movimentacao ocorrera com base nela";
     echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Ja existe lista em $ROOT/..." >> $LOG;
@@ -108,7 +109,6 @@ else
 
   if [ $QTD_TOTAL -gt 0 ]
   then
-    echo ""; echo "Listas para movimentacao criadas em $ROOT/";
 
     echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - $QTD_TOTAL verificados, sendo $QTD_ARQUIVOS arquivos e $QTD_DIR diretorios" >> $LOG;
 
