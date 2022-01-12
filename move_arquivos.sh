@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script By: Gabriel Souza
-# OBS: Script dedicado a movimentacao automatizada de uma grande lista de arquivos.
+# OBS: Script para movimentacao de uma grande lista de arquivos/diretorios segura e auditavel.
 
 DIR_SRC=${1%/};
 DIR_DST=${2%/};
@@ -73,13 +73,22 @@ else
   echo "###======== Inicio execucao $(date "+%d/%m/%Y %H:%M:%S") ========###" >> $LOG;
 
   print_separador;
-  echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Listando arquivos e diretorios a serem movidos..." >> $LOG;
-  echo ""; echo "Listando arquivos e diretorios a serem movidos...";
 
-  ls -1 $DIR_SRC > $LISTA_SRC;
-  ls -d1 $DIR_SRC/*/ 2>/dev/null | awk -F "$DIR_SRC/" {'print $2'} > $LISTA_DIR_SRC;
-
-  echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Listas criadas em $ROOT/..." >> $LOG;
+  if [ ! -e $LISTA_SRC ] && [ ! -e $LISTA_DIR_SRC ]; then
+    echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Listando arquivos e diretorios a serem movidos..." >> $LOG;
+    echo ""; echo "Nao existem listas para movimentacao! Gerando...";
+    ls -1 $DIR_SRC > $LISTA_SRC;
+    ls -d1 $DIR_SRC/*/ 2>/dev/null | awk -F "$DIR_SRC/" {'print $2'} > $LISTA_DIR_SRC;
+    echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Listas criadas em $ROOT/..." >> $LOG;
+  else
+    echo ""; echo "Ja existe pelo menos uma lista em $ROOT/! A movimentacao ocorrera com base nela";
+    echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Ja existe lista em $ROOT/..." >> $LOG;
+    if [ ! -e $ROOT/lista_arquivos.txt ]; then
+      >$LISTA_SRC;
+    else
+      >$LISTA_DIR_SRC;
+    fi
+  fi
 
   echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Verificando arquivos e diretorios..." >> $LOG;
   echo ""; echo "Verificando arquivos e diretorios...";
@@ -88,12 +97,14 @@ else
 
   QTD_TOTAL=`cat $LISTA_SRC | wc -l`;
 
-  while IFS= read -r linha || [[ -n "$linha" ]]; do
-    sed -i "/$linha/d" $LISTA_SRC;
-  done < "$LISTA_DIR_SRC"
-
   QTD_ARQUIVOS=`cat $LISTA_SRC | wc -l`;
   QTD_DIR=`cat $LISTA_DIR_SRC | wc -l`;
+
+  if [ $QTD_DIR -gt 0 ]; then
+    while IFS= read -r linha || [[ -n "$linha" ]]; do
+      sed -i "/$linha/d" $LISTA_SRC;
+    done < "$LISTA_DIR_SRC"
+  fi
 
   if [ $QTD_TOTAL -gt 0 ]
   then
@@ -105,18 +116,23 @@ else
     echo ""; echo "Movendo arquivos de $DIR_SRC/ para $DIR_DST/..."; echo "";
 
     echo "Arquivos nao encontrados:" >> $LISTA_F; echo "" >> $LISTA_F;
-    while IFS= read -r linha || [[ -n "$linha" ]]; do
-      cp $DIR_SRC/$linha $DIR_DST 2>/dev/null;
-      valida_movimentacao $linha;
-    done < "$LISTA_SRC"
+    
+    if [ $QTD_ARQUIVOS -gt 0 ]; then
+      while IFS= read -r linha || [[ -n "$linha" ]]; do
+        cp $DIR_SRC/$linha $DIR_DST 2>/dev/null;
+        valida_movimentacao $linha;
+      done < "$LISTA_SRC"
+    fi
 
     echo "" >> $LOG; echo "$(date "+%d/%m/%Y %H:%M:%S") - Movendo diretorios de $DIR_SRC/ para $DIR_DST/..." >> $LOG; echo "" >> $LOG;
-
     echo "" >> $LISTA_F; echo "Diretorios nao encontrados:" >> $LISTA_F; echo "" >> $LISTA_F;
-    while IFS= read -r linha || [[ -n "$linha" ]]; do
-      cp $DIR_SRC/$linha $DIR_DST/ -r 2>/dev/null;
-      valida_movimentacao $linha;
-    done < "$LISTA_DIR_SRC"
+    
+    if [ $QTD_DIR -gt 0 ]; then
+      while IFS= read -r linha || [[ -n "$linha" ]]; do
+        cp $DIR_SRC/$linha $DIR_DST/ -r 2>/dev/null;
+        valida_movimentacao $linha;
+      done < "$LISTA_DIR_SRC"
+    fi
 
     echo "" >> $LOG; echo "Resumo:" >> $LOG; echo "" >> $LOG;
     echo "TOTAL = $QTD_TOTAL" >> $LOG;
