@@ -100,7 +100,6 @@ else
   QTD_DIR=`cat $LISTA_DIR_SRC | egrep [a-zA-Z0-9] | wc -l`;
 
   let QTD_TOTAL=$QTD_ARQUIVOS+$QTD_DIR;
-  echo "$QTD_TOTAL";
 
   if [ $QTD_DIR -gt 0 ]; then
     while IFS= read -r linha || [[ -n "$linha" ]]; do
