@@ -2,7 +2,7 @@
 
 Script em shell criado para automatizar a movimentação de uma lista de arquivos muito extensa.
 
-Esse script irá copiar todos os arquivos/diretórios do diretório origem, para o diretório destino que desejar, fazendo uma validação simples da existencia do arquivo no diretório destino, seguido da remoção do arquivo no diretório origem. Tudo é executado de forma individual, ou seja, será copiado, validado e removido um a um.
+Esse script irá copiar todos os arquivos/diretórios do diretório origem, para o diretório destino que desejar, fazendo uma validação simples da existencia do arquivo no diretório destino, seguido da remoção do arquivo no diretório origem. Tudo é movido individualmente, ou seja, será copiado, validado e removido um a um.
 
 Aproveite e leia o script antes de executa-lo, verifique se atende a sua demanda!
 
