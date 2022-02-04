@@ -96,16 +96,16 @@ else
 
   sed -i 's/\/$//' $LISTA_DIR_SRC;
 
-  QTD_ARQUIVOS=`cat $LISTA_SRC | egrep [a-zA-Z0-9] | wc -l`;
   QTD_DIR=`cat $LISTA_DIR_SRC | egrep [a-zA-Z0-9] | wc -l`;
-
-  let QTD_TOTAL=$QTD_ARQUIVOS+$QTD_DIR;
 
   if [ $QTD_DIR -gt 0 ]; then
     while IFS= read -r linha || [[ -n "$linha" ]]; do
       sed -i "/$linha/d" $LISTA_SRC;
     done < "$LISTA_DIR_SRC"
   fi
+  
+  QTD_ARQUIVOS=`cat $LISTA_SRC | egrep [a-zA-Z0-9] | wc -l`;  
+  let QTD_TOTAL=$QTD_ARQUIVOS+$QTD_DIR;
 
   if [ $QTD_TOTAL -gt 0 ]; then
 
