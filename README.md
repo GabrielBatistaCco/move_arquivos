@@ -28,12 +28,8 @@ Após isso, basta executar o script informando os diretórios de origem e destin
 OBS: A movimentação pode ser feita a partir de uma lista, se existirem arquivos com os seguintes nomes dentro do diretório do script:
 
 <pre>
-lista_arquivos.txt
-lista_diretorios.txt
+listas/lista_arquivos.txt
+listas/lista_diretorios.txt
 </pre>
 
-Se quiser acompanhar a execução de forma detalhadalhada, abra outro terminal e use:
-
-<pre>
-tail -f /var/log/move_arquivos.log
-</pre>
+Se quiser acompanhar ou analisar a execução, tudo estará sendo registrado em: /var/log/move_arquivos.log
