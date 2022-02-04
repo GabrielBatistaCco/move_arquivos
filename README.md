@@ -25,7 +25,7 @@ Após isso, basta executar o script informando os diretórios de origem e destin
 ./move_arquivos.sh /diretorio/origem/ /diretorio/destino/
 </pre>
 
-OBS: Se já existir qualquer lista no diretório do script, a movimentação será feita a partir dela, sendo seus possíveis nomes:
+OBS: A movimentação pode ser feita a partir de uma lista, se existirem arquivos com os seguintes nomes dentro do diretório do script:
 
 <pre>
 lista_arquivos.txt
