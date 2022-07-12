@@ -112,8 +112,8 @@ function calcula_tempo {
 
 function resumo_execucao {
   log 0; log 00 "RESUMO DA EXECUCAO:";
-  log 0 "  Arquivos: $QTD_DIR";
-  log 00 "  Diretórios: $QTD_ARQUIVOS";
+  log 0 "  Arquivos: $QTD_ARQUIVOS";
+  log 00 "  Diretórios: $QTD_DIR";
   log 0 "  TOTAL = $QTD_TOTAL";
   log 0 "  SUCESSO = $COUNT_S";
   log 00 "  FALHAS = $COUNT_F";
