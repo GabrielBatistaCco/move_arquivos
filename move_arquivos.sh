@@ -74,9 +74,9 @@ function gera_listas {
 function valida_movimentacao {
   if [ $? -eq 0 ]
   then
-    # if [ `ls -d1 $DIR_DST/"$1" 2>/dev/null | wc -l` -eq 1 ]
-    diff $DIR_SRC/"$1" $DIR_DST/"$1" >/dev/null;
-    if [ $? -eq 0 ]
+    # diff $DIR_SRC/"$1" $DIR_DST/"$1" >/dev/null;
+    # if [ $? -eq 0 ]
+    if [ `ls -d1 $DIR_DST/"$1" 2>/dev/null | wc -l` -eq 1 ]
     then
       log 1 "$1 ${GREEN}(sucesso)${NC}";
       rm $DIR_SRC/"$1" -r 2>/dev/null;
