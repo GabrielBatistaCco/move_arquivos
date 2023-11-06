@@ -82,7 +82,7 @@ function valida_movimentacao {
       rm $DIR_SRC/"$1" -r 2>/dev/null;
       let COUNT_S++;
     else
-      log 1 "$1 ${RED}(nao encontrado)${NC}";
+      log 1 "$1 ${RED}(diferente do original ou nao encontrado)${NC}";
       echo "  $1" >> $LOG_F;
       let COUNT_F++;
     fi;
